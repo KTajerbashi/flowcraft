@@ -48,7 +48,9 @@
               "node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn.css",
               "src/styles.scss"
             ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"],
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ],
             "server": "src/main.server.ts",
             "outputMode": "server",
             "security": {
@@ -84,6 +86,9 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "bpmn-io:build:production"
