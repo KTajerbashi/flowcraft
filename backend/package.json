@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsx watch src/server.ts",
-    "start": "tsx src/server.ts"
+    "start": "tsx watch src/server.ts"
   },
   "dependencies": {
     "express": "^5.1.0"

@@ -1,0 +1,287 @@
+<div class="container-fluid dashboard-container py-4 px-3 px-lg-4">
+
+    <!-- Page Header -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+        <div>
+            <h1 class="h3 fw-bold mb-1">Dashboard</h1>
+            <p class="text-secondary mb-0">
+                Welcome to FlowCraft Workflow Designer
+            </p>
+        </div>
+
+        <button class="btn btn-primary d-flex align-items-center gap-2" type="button" (click)="createWorkflow()">
+            <i class="bi bi-plus-lg"></i>
+            Create Workflow
+        </button>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card stat-card h-100 border-0 shadow-sm">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-secondary mb-2">Total Workflows</p>
+                        <h2 class="h3 fw-bold mb-1">{{ stats.total }}</h2>
+                        <small class="text-secondary">All saved workflows</small>
+                    </div>
+                    <div class="stat-icon bg-primary-subtle text-primary">
+                        <i class="bi bi-diagram-3"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card stat-card h-100 border-0 shadow-sm">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-secondary mb-2">Active Workflows</p>
+                        <h2 class="h3 fw-bold mb-1">{{ stats.active }}</h2>
+                        <small class="text-secondary">Currently active</small>
+                    </div>
+                    <div class="stat-icon bg-success-subtle text-success">
+                        <i class="bi bi-play-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card stat-card h-100 border-0 shadow-sm">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-secondary mb-2">Drafts</p>
+                        <h2 class="h3 fw-bold mb-1">{{ stats.drafts }}</h2>
+                        <small class="text-secondary">Work in progress</small>
+                    </div>
+                    <div class="stat-icon bg-warning-subtle text-warning-emphasis">
+                        <i class="bi bi-file-earmark-text"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card stat-card h-100 border-0 shadow-sm">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <p class="text-secondary mb-2">Archived</p>
+                        <h2 class="h3 fw-bold mb-1">{{ stats.archived }}</h2>
+                        <small class="text-secondary">Archived workflows</small>
+                    </div>
+                    <div class="stat-icon bg-secondary-subtle text-secondary">
+                        <i class="bi bi-archive"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Main Content -->
+    <div class="row g-4">
+
+        <!-- Recent Workflows -->
+        <div class="col-12 col-xl-8">
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-header bg-white border-0 pt-4 px-4">
+                    <div class="d-flex justify-content-between align-items-center gap-2">
+                        <div>
+                            <h2 class="h5 fw-bold mb-1">Recent Workflows</h2>
+                            <p class="text-secondary small mb-0">
+                                Manage your recently updated diagrams
+                            </p>
+                        </div>
+
+                        <a routerLink="/workflows" class="btn btn-sm btn-outline-primary">
+                            View all
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card-body px-4">
+
+                    <!-- Loading -->
+                    @if (isLoading) {
+
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="text-secondary mt-2 mb-0">
+                            Loading workflows...
+                        </p>
+                    </div>
+                    }
+
+                    <!-- Error -->
+                    @if (!isLoading && errorMessage) {
+                    <div class="alert alert-danger" role="alert">
+                        {{ errorMessage }}
+                    </div>
+                    }
+
+                    <!-- Empty State -->
+                    @if (!isLoading && !errorMessage && workflows.length === 0) {
+                    <div class="text-center py-5">
+                        <i class="bi bi-diagram-3 empty-icon"></i>
+
+                        <h3 class="h6 fw-bold mt-3">No workflows yet</h3>
+
+                        <p class="text-secondary">
+                            Create your first BPMN workflow to get started.
+                        </p>
+
+                        <button class="btn btn-primary" type="button" (click)="createWorkflow()">
+                            Create your first workflow
+                        </button>
+                    </div>
+                    }
+
+                    <!-- Workflow List -->
+                    @if (!isLoading && !errorMessage && workflows.length > 0) {
+                    <div class="table-responsive">
+                        <table class="table align-middle dashboard-table mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Workflow</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Last Updated</th>
+                                    <th scope="col" class="text-end">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @for (workflow of workflows; track workflow.entityId) {
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div class="workflow-icon">
+                                                <i class="bi bi-bezier2"></i>
+                                            </div>
+
+                                            <div>
+                                                <div class="fw-semibold">
+                                                    {{ workflow.name }}
+                                                </div>
+
+                                                <small class="text-secondary">
+                                                    BPMN Workflow
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge rounded-pill" [ngClass]="{
+                  'text-bg-success': workflow.status === 'Active',
+                  'text-bg-warning': workflow.status === 'Draft',
+                  'text-bg-secondary': workflow.status === 'Archived'
+                }">
+                                            {{ workflow.status }}
+                                        </span>
+                                    </td>
+
+                                    <td class="text-secondary small">
+                                        {{ workflow.updatedAt | date: 'mediumDate' }}
+                                    </td>
+
+                                    <td class="text-end">
+                                        <button class="btn btn-sm btn-light border" type="button"
+                                            [attr.aria-label]="'Open ' + workflow.name"
+                                            (click)="openWorkflow(workflow.entityId)">
+                                            <i class="bi bi-arrow-up-right"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="col-12 col-xl-4">
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-header bg-white border-0 pt-4 px-4">
+                    <h2 class="h5 fw-bold mb-1">Quick Actions</h2>
+                    <p class="text-secondary small mb-0">
+                        Shortcuts to your workspace
+                    </p>
+                </div>
+
+                <div class="card-body px-4">
+                    <div class="d-grid gap-3">
+
+                        <button type="button" class="quick-action" (click)="createWorkflow()">
+                            <span class="quick-action-icon bg-primary-subtle text-primary">
+                                <i class="bi bi-plus-circle"></i>
+                            </span>
+                            <span class="text-start flex-grow-1">
+                                <span class="d-block fw-semibold">New Workflow</span>
+                                <small class="text-secondary">
+                                    Design a new BPMN diagram
+                                </small>
+                            </span>
+                            <i class="bi bi-chevron-right text-secondary"></i>
+                        </button>
+
+                        <a routerLink="/workflows" class="quick-action text-decoration-none">
+                            <span class="quick-action-icon bg-success-subtle text-success">
+                                <i class="bi bi-folder2-open"></i>
+                            </span>
+                            <span class="text-start flex-grow-1">
+                                <span class="d-block fw-semibold">All Workflows</span>
+                                <small class="text-secondary">
+                                    Browse saved diagrams
+                                </small>
+                            </span>
+                            <i class="bi bi-chevron-right text-secondary"></i>
+                        </a>
+
+                        <a routerLink="/workflow-management" class="quick-action text-decoration-none">
+                            <span class="quick-action-icon bg-info-subtle text-info-emphasis">
+                                <i class="bi bi-sliders"></i>
+                            </span>
+                            <span class="text-start flex-grow-1">
+                                <span class="d-block fw-semibold">Workflow Management</span>
+                                <small class="text-secondary">
+                                    Manage workflow information
+                                </small>
+                            </span>
+                            <i class="bi bi-chevron-right text-secondary"></i>
+                        </a>
+
+                        <a routerLink="/workflow-monitoring" class="quick-action text-decoration-none">
+                            <span class="quick-action-icon bg-warning-subtle text-warning-emphasis">
+                                <i class="bi bi-activity"></i>
+                            </span>
+                            <span class="text-start flex-grow-1">
+                                <span class="d-block fw-semibold">Monitoring</span>
+                                <small class="text-secondary">
+                                    Review workflow activity
+                                </small>
+                            </span>
+                            <i class="bi bi-chevron-right text-secondary"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center text-secondary small mt-4">
+        FlowCraft · BPMN Workflow Designer
+    </div>
+
+</div>
