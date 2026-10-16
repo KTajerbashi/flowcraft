@@ -27,6 +27,15 @@ export class Header implements OnInit {
       },
 
       {
+        entityId: 'workflows',
+        name: 'workflows',
+        title: 'Workflows',
+        icon: '⚙️',
+        link: '/workflows',
+        children: [],
+      },
+
+       {
         entityId: 'designer',
         name: 'designer',
         title: 'Designer',
@@ -35,55 +44,6 @@ export class Header implements OnInit {
         children: [],
       },
 
-      {
-        entityId: 'processes',
-        name: 'processes',
-        title: 'Processes',
-        icon: '▦',
-        link: '/processes',
-        children: [],
-      },
-
-      {
-        entityId: 'templates',
-        name: 'templates',
-        title: 'Templates',
-        icon: '◫',
-        link: '/templates',
-        children: [],
-      },
-      {
-        entityId: 'users',
-        name: 'users',
-        title: 'Users',
-        icon: '♙',
-        link: '/users',
-        children: [],
-      },
-      {
-        entityId: 'roles',
-        name: 'roles',
-        title: 'Roles',
-        icon: '◈',
-        link: '/roles',
-        children: [],
-      },
-      {
-        entityId: 'groups',
-        name: 'groups',
-        title: 'Groups',
-        icon: '♧',
-        link: '/groups',
-        children: [],
-      },
-      {
-        entityId: 'forms',
-        name: 'forms',
-        title: 'Forms',
-        icon: '▤',
-        link: '/forms',
-        children: [],
-      },
     ];
   }
 }
