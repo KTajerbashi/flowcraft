@@ -1,0 +1,97 @@
+<section class="designer-page">
+    <header class="designer-header glass-panel">
+        <div class="designer-heading">
+            <div class="designer-icon">
+                <i class="bi bi-diagram-3-fill"></i>
+            </div>
+
+            <div>
+                <h1>BPMN Designer</h1>
+                <p>Design and manage your workflow diagram.</p>
+            </div>
+        </div>
+
+        <div class="designer-actions">
+            <label class="btn btn-glass mb-0">
+                <i class="bi bi-upload me-2"></i>
+                Import XML
+
+                <input type="file" accept=".bpmn,.xml,application/xml,text/xml" hidden
+                    (change)="importXmlFile($event)" />
+            </label>
+
+
+            <button type="button" class="btn btn-glass" [disabled]="loading() || saving()" (click)="onSetXML()">
+                <i class="bi bi-download me-2"></i>
+                Set XML
+            </button>
+
+            <button type="button" class="btn btn-glass" [disabled]="loading() || saving()" (click)="downloadXml()">
+                <i class="bi bi-download me-2"></i>
+                Export XML
+            </button>
+
+            <button type="button" class="btn btn-glass-primary" [disabled]="loading() || saving()"
+                (click)="saveWorkflow()">
+                @if (saving()) {
+                <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+                Saving...
+                } @else {
+                <i class="bi bi-cloud-check me-2"></i>
+                Save Workflow
+                }
+            </button>
+        </div>
+    </header>
+
+    @if (errorMessage(); as message) {
+    <div class="glass-alert glass-alert-danger" role="alert">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <span>{{ message }}</span>
+    </div>
+    }
+
+    @if (successMessage(); as message) {
+    <div class="glass-alert glass-alert-success" role="status">
+        <i class="bi bi-check-circle-fill"></i>
+        <span>{{ message }}</span>
+    </div>
+    }
+
+    @if (dirty()) {
+    <div class="editor-status">
+        <span class="status-dot"></span>
+        Unsaved changes
+    </div>
+    }
+
+    <div class="designer-workspace glass-panel">
+        <div class="workspace-toolbar">
+            <div class="workspace-indicator">
+                <span class="live-dot"></span>
+                <span>Diagram Workspace</span>
+            </div>
+
+            <div class="workspace-hint">
+                <i class="bi bi-grid-3x3 me-2"></i>
+                BPMN Canvas
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            @if (loading()) {
+            <div class="editor-overlay">
+                <div class="glass-loader">
+                    <div class="spinner-border text-info" role="status">
+                        <span class="visually-hidden">Loading editor...</span>
+                    </div>
+
+                    <span>Loading BPMN editor...</span>
+                </div>
+            </div>
+            }
+
+            <div #canvas class="bpmn-canvas"></div>
+        </div>
+    </div>
+</section>
