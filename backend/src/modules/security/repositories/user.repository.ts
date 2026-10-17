@@ -4,8 +4,7 @@ import {
     UserModel
 } from '../models/user.model';
 
-export class UserRepository
-    extends BaseRepository<IUser> {
+export class UserRepository extends BaseRepository<IUser> {
 
     constructor() {
         super(UserModel);

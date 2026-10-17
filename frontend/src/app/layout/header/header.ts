@@ -47,7 +47,7 @@ export class Header implements OnInit {
         name: 'user',
         title: 'UserManagement',
         icon: 'bi bi-person',
-        link: '/dashboard',
+        link: '/security/users',
         children: [],
       },
     ];

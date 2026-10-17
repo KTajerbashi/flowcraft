@@ -1,9 +1,7 @@
-import mongoose, {
-    Document,
-    Schema
-} from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
+import { IBaseEntity } from '../../../core/models/IBaseEntity';
 
-export interface IUserRole extends Document {
+export interface IUserRole extends IBaseEntity {
 
     userId: mongoose.Types.ObjectId;
 
@@ -14,29 +12,26 @@ export interface IUserRole extends Document {
     updatedAt: Date;
 }
 
-const userRoleSchema =
-    new Schema<IUserRole>(
-        {
+const EntitySchema = new Schema<IUserRole>({
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
 
-            userId: {
-                type: Schema.Types.ObjectId,
-                ref: 'User',
-                required: true
-            },
+    roleId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Role',
+        required: true
+    }
 
-            roleId: {
-                type: Schema.Types.ObjectId,
-                ref: 'Role',
-                required: true
-            }
+},
+    {
+        timestamps: true
+    }
+);
 
-        },
-        {
-            timestamps: true
-        }
-    );
-
-userRoleSchema.index(
+EntitySchema.index(
     {
         userId: 1,
         roleId: 1
@@ -46,8 +41,4 @@ userRoleSchema.index(
     }
 );
 
-export const UserRoleModel =
-    mongoose.model<IUserRole>(
-        'UserRole',
-        userRoleSchema
-    );
+export const UserRoleModel = mongoose.model<IUserRole>('UserRole', EntitySchema);

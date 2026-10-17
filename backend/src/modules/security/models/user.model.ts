@@ -1,20 +1,15 @@
-import mongoose, {
-    Document,
-    Schema
-} from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
+import { IBaseEntity } from '../../../core/models/IBaseEntity';
 
-export interface IUser extends Document {
+export interface IUser extends IBaseEntity {
     username: string;
     email: string;
     password: string;
     firstName?: string;
     lastName?: string;
-    isActive: boolean;
-    createdAt: Date;
-    updatedAt: Date;
 }
 
-const userSchema = new Schema<IUser>(
+const EntitySchema = new Schema<IUser>(
     {
         username: {
             type: String,
@@ -51,4 +46,4 @@ const userSchema = new Schema<IUser>(
     }
 );
 
-export const UserModel = mongoose.model<IUser>('User', userSchema);
+export const UserModel = mongoose.model<IUser>('User', EntitySchema);

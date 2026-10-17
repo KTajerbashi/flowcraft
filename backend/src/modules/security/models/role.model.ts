@@ -1,22 +1,12 @@
-import mongoose, {
-  Document,
-  Schema
-} from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
+import { IBaseEntity } from '../../../core/models/IBaseEntity';
 
-export interface IRole extends Document {
-
+export interface IRole extends IBaseEntity {
   name: string;
-
   description?: string;
-
-  isActive: boolean;
-
-  createdAt: Date;
-
-  updatedAt: Date;
 }
 
-const roleSchema = new Schema<IRole>(
+const EntitySchema = new Schema<IRole>(
   {
 
     name: {
@@ -42,8 +32,4 @@ const roleSchema = new Schema<IRole>(
   }
 );
 
-export const RoleModel =
-  mongoose.model<IRole>(
-    'Role',
-    roleSchema
-  );
+export const RoleModel = mongoose.model<IRole>('Role', EntitySchema);
