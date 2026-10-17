@@ -12,6 +12,11 @@ export const routes: Routes = [
   },
 
   {
+    path: '401',
+    loadComponent: () => import('./un-authorize/un-authorize').then((m) => m.UnAuthorize),
+  },
+
+  {
     path: '',
     redirectTo: '404',
     pathMatch: 'full',
