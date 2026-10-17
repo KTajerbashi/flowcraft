@@ -1,9 +1,21 @@
-import { Component } from '@angular/core';
+
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  imports: [],
-  selector: 'app-un-authorize',
-  styleUrl: './un-authorize.scss',
+  selector: 'app-unauthorized',
+  standalone: true,
   templateUrl: './un-authorize.html',
+  styleUrl: './un-authorize.scss',
 })
-export class UnAuthorize {}
+export class UnAuthorize {
+  private readonly router = inject(Router);
+
+  onLogin(): void {
+    void this.router.navigate(['/login']);
+  }
+
+  onBackToDashboard(): void {
+    void this.router.navigate(['/dashboard']);
+  }
+}

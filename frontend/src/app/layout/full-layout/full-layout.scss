@@ -1,0 +1,280 @@
+/* =========================================
+   FlowCraft - Global Glass Layout
+   Dark Glassmorphism + Aurora Gradient
+   ========================================= */
+
+:host {
+    display: block;
+    min-height: 100%;
+    color: #f1f5ff;
+}
+
+.full-layout {
+    // Design tokens
+    --glass-bg: rgba(17, 24, 45, 0.58);
+    --glass-bg-strong: rgba(17, 24, 45, 0.82);
+    --glass-border: rgba(255, 255, 255, 0.13);
+    --glass-highlight: rgba(255, 255, 255, 0.08);
+
+    --text-primary: #f1f5ff;
+    --text-secondary: #aab7d1;
+
+    --accent-blue: #60a5fa;
+    --accent-cyan: #22d3ee;
+    --accent-purple: #a78bfa;
+
+    position: relative;
+    isolation: isolate;
+
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(ellipse at 15% 10%,
+            rgba(37, 99, 235, 0.24),
+            transparent 40%),
+        radial-gradient(ellipse at 85% 15%,
+            rgba(147, 51, 234, 0.20),
+            transparent 38%),
+        radial-gradient(ellipse at 50% 100%,
+            rgba(6, 182, 212, 0.16),
+            transparent 45%),
+        linear-gradient(135deg,
+            #080d1b 0%,
+            #111a32 48%,
+            #0b1020 100%);
+
+    color: var(--text-primary);
+    font-family: 'IRANSansWeb';
+}
+
+/* =========================================
+   Aurora / blurred light effects
+   ========================================= */
+
+.aurora {
+    position: absolute;
+    z-index: -1;
+
+    width: 34rem;
+    aspect-ratio: 1;
+
+    border-radius: 50%;
+    filter: blur(100px);
+
+    opacity: 0.35;
+    pointer-events: none;
+
+    will-change: transform;
+    animation: aurora-float 18s ease-in-out infinite alternate;
+
+    &--blue {
+        top: -15rem;
+        left: -10rem;
+
+        background: #2563eb;
+    }
+
+    &--purple {
+        top: 15%;
+        right: -18rem;
+
+        background: #9333ea;
+        animation-delay: -6s;
+    }
+
+    &--cyan {
+        bottom: -22rem;
+        left: 30%;
+
+        background: #06b6d4;
+        animation-delay: -10s;
+    }
+}
+
+@keyframes aurora-float {
+    from {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    to {
+        transform: translate3d(35px, -25px, 0) scale(1.12);
+    }
+}
+
+/* =========================================
+   Background grid
+   ========================================= */
+
+.layout-grid {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px),
+        linear-gradient(90deg,
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px);
+
+    background-size: 48px 48px;
+
+    mask-image: linear-gradient(to bottom,
+            black,
+            transparent 90%);
+}
+
+/* =========================================
+   Main router surface
+   ========================================= */
+
+.layout-content {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    background: transparent;
+}
+
+/* =========================================
+   Reusable glass utility classes
+   ========================================= */
+
+:host ::ng-deep .glass-panel {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    backdrop-filter: blur(24px) saturate(150%);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+    color: var(--text-primary);
+}
+
+:host ::ng-deep .glass-card {
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(135deg,
+            rgba(255, 255, 255, 0.075),
+            rgba(255, 255, 255, 0.02)),
+        var(--glass-bg);
+
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+
+    box-shadow:
+        0 12px 36px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+    transition:
+        border-color 220ms ease,
+        background 220ms ease,
+        box-shadow 220ms ease,
+        transform 220ms ease;
+
+    &:hover {
+        border-color: rgba(96, 165, 250, 0.35);
+
+        box-shadow:
+            0 18px 44px rgba(0, 0, 0, 0.24),
+            0 0 24px rgba(59, 130, 246, 0.07),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+        transform: translateY(-2px);
+    }
+}
+
+/* =========================================
+   Scrollbar
+   ========================================= */
+
+:host ::ng-deep * {
+    scrollbar-width: thin;
+    scrollbar-color:
+        rgba(148, 163, 184, 0.4) transparent;
+}
+
+:host ::ng-deep *::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+:host ::ng-deep *::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+:host ::ng-deep *::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.35);
+    border-radius: 20px;
+}
+
+:host ::ng-deep *::-webkit-scrollbar-thumb:hover {
+    background: rgba(96, 165, 250, 0.65);
+}
+
+/* =========================================
+   Responsive
+   ========================================= */
+
+@media (max-width: 768px) {
+    .aurora {
+        width: 22rem;
+        filter: blur(75px);
+    }
+
+    .layout-grid {
+        background-size: 32px 32px;
+    }
+
+    :host ::ng-deep .glass-panel {
+        border-radius: 16px;
+        -webkit-backdrop-filter: blur(18px);
+        backdrop-filter: blur(18px);
+    }
+}
+
+/* =========================================
+   Accessibility
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .aurora {
+        animation: none;
+    }
+
+    :host ::ng-deep .glass-card {
+        transition: none;
+    }
+
+    :host ::ng-deep .glass-card:hover {
+        transform: none;
+    }
+}

@@ -1,1 +1,40 @@
-<p>un-authorize works!</p>
+<div class="error-page">
+    <div class="error-card">
+        <div class="error-icon">
+            <i class="bi bi-shield-lock-fill"></i>
+        </div>
+
+        <span class="error-code">401</span>
+
+        <h1>Unauthorized Access</h1>
+
+        <p class="error-description">
+            You don't have permission to access this resource.
+            Please sign in to continue or return to your dashboard.
+        </p>
+
+        <div class="error-details">
+            <i class="bi bi-info-circle"></i>
+            <span>
+                Your session may have expired or you may need to authenticate.
+            </span>
+        </div>
+
+        <div class="error-actions">
+            <button type="button" class="btn btn-primary" (click)="onLogin()">
+                <i class="bi bi-box-arrow-in-right"></i>
+                Sign In
+            </button>
+
+            <button type="button" class="btn btn-glass" (click)="onBackToDashboard()">
+                <i class="bi bi-house-door"></i>
+                Back to Dashboard
+            </button>
+        </div>
+
+        <div class="error-footer">
+            <span>HTTP STATUS CODE</span>
+            <strong>401 · UNAUTHORIZED</strong>
+        </div>
+    </div>
+</div>

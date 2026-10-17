@@ -1,0 +1,342 @@
+:host {
+    display: block;
+    min-height: 100%;
+}
+
+.server-error-page {
+    --glass-bg: rgba(255, 255, 255, 0.12);
+    --glass-border: rgba(255, 255, 255, 0.24);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.76);
+    --accent: #ff8a65;
+    --accent-dark: #ff5252;
+
+    min-height: 100vh;
+    width: 100%;
+    padding: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at 15% 20%,
+            rgba(255, 82, 82, 0.45),
+            transparent 35%),
+        radial-gradient(circle at 85% 80%,
+            rgba(153, 0, 255, 0.4),
+            transparent 35%),
+        linear-gradient(135deg,
+            #07152e 0%,
+            #182d54 50%,
+            #261746 100%);
+
+    font-family: inherit;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(2px);
+        pointer-events: none;
+    }
+
+    &::before {
+        width: 260px;
+        height: 260px;
+        top: -100px;
+        right: -60px;
+        background: rgba(255, 138, 101, 0.18);
+    }
+
+    &::after {
+        width: 320px;
+        height: 320px;
+        bottom: -160px;
+        left: -80px;
+        background: rgba(88, 101, 242, 0.22);
+    }
+}
+
+.server-error-card {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    max-width: 600px;
+    padding: 48px 40px 28px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    color: var(--text-primary);
+
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 28px;
+
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+
+    box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+    animation: card-appear 0.55s ease-out both;
+}
+
+.error-icon {
+    width: 78px;
+    height: 78px;
+    margin-bottom: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 24px;
+    color: #fff;
+
+    background: linear-gradient(135deg,
+            rgba(255, 138, 101, 0.95),
+            rgba(255, 82, 82, 0.8));
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    box-shadow:
+        0 12px 30px rgba(255, 82, 82, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+    i {
+        font-size: 34px;
+    }
+}
+
+.error-label {
+    margin-bottom: 4px;
+    color: #ffb39e;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.error-code {
+    margin: 0;
+
+    font-size: clamp(90px, 17vw, 140px);
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -8px;
+
+    background: linear-gradient(180deg,
+            #ffffff 15%,
+            #ffb39e 65%,
+            #ff755f 100%);
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    filter: drop-shadow(0 8px 24px rgba(255, 82, 82, 0.15));
+}
+
+.error-title {
+    margin: 12px 0 14px;
+    font-size: clamp(21px, 4vw, 28px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.error-description {
+    max-width: 410px;
+    margin: 0;
+
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.error-details {
+    width: 100%;
+    margin-top: 26px;
+    padding: 15px 16px;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    text-align: left;
+    color: rgba(255, 255, 255, 0.82);
+
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+
+    font-size: 13px;
+    line-height: 1.7;
+
+    i {
+        flex-shrink: 0;
+        margin-top: 3px;
+        color: #ffb39e;
+        font-size: 17px;
+    }
+}
+
+.error-actions {
+    width: 100%;
+    margin-top: 28px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+
+    button {
+        min-height: 48px;
+        padding: 0 20px;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 700;
+        font-family: inherit;
+
+        cursor: pointer;
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease,
+            background 0.2s ease;
+
+        i {
+            font-size: 17px;
+        }
+
+        &:hover {
+            transform: translateY(-2px);
+        }
+
+        &:focus-visible {
+            outline: 3px solid #fff;
+            outline-offset: 4px;
+        }
+    }
+}
+
+.btn-glass-primary {
+    color: #fff;
+    background: linear-gradient(135deg, #ff8a65, #ff5252);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    box-shadow: 0 8px 22px rgba(255, 82, 82, 0.22);
+
+    &:hover {
+        box-shadow: 0 12px 28px rgba(255, 82, 82, 0.32);
+    }
+}
+
+.btn-glass-secondary {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.18);
+    }
+}
+
+.error-footer {
+    width: 100%;
+    margin-top: 32px;
+    padding-top: 20px;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 11px;
+    letter-spacing: 0.3px;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ff8a65;
+    box-shadow: 0 0 10px rgba(255, 138, 101, 0.6);
+}
+
+.footer-divider {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+@keyframes card-appear {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 576px) {
+    .server-error-page {
+        padding: 16px;
+    }
+
+    .server-error-card {
+        padding: 34px 20px 22px;
+        border-radius: 22px;
+    }
+
+    .error-icon {
+        width: 66px;
+        height: 66px;
+        border-radius: 20px;
+    }
+
+    .error-code {
+        letter-spacing: -5px;
+    }
+
+    .error-actions {
+        flex-direction: column;
+
+        button {
+            width: 100%;
+        }
+    }
+
+    .error-footer {
+        gap: 7px;
+        line-height: 1.6;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .server-error-card {
+        animation: none;
+    }
+
+    .error-actions button {
+        transition: none;
+    }
+}

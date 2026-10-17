@@ -1,9 +1,16 @@
+
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [],
   selector: 'app-server-error',
-  styleUrl: './server-error.scss',
+  standalone: true,
+  imports: [RouterLink],
   templateUrl: './server-error.html',
+  styleUrl: './server-error.scss',
 })
-export class ServerError {}
+export class ServerError {
+  onRetry(): void {
+    window.location.reload();
+  }
+}

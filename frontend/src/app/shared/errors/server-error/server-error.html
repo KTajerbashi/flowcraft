@@ -1,1 +1,48 @@
-<p>server-error works!</p>
+<div class="server-error-page">
+    <div class="server-error-card">
+
+        <div class="error-icon">
+            <i class="bi bi-exclamation-triangle"></i>
+        </div>
+
+        <span class="error-label">SERVER ERROR</span>
+
+        <h1 class="error-code">500</h1>
+
+        <h2 class="error-title">Internal Server Error</h2>
+
+        <p class="error-description">
+            Something went wrong on our server.
+            We're working to fix the issue.
+            Please try again in a few moments.
+        </p>
+
+        <div class="error-details">
+            <i class="bi bi-info-circle"></i>
+            <span>
+                The server encountered an unexpected condition
+                and couldn't complete your request.
+            </span>
+        </div>
+
+        <div class="error-actions">
+            <button type="button" class="btn-glass-primary" routerLink="/dashboard">
+                <i class="bi bi-house-door"></i>
+                <span>Back to Dashboard</span>
+            </button>
+
+            <button type="button" class="btn-glass-secondary" (click)="onRetry()">
+                <i class="bi bi-arrow-clockwise"></i>
+                <span>Try Again</span>
+            </button>
+        </div>
+
+        <div class="error-footer">
+            <span class="status-dot"></span>
+            <span>FlowCraft Workflow Designer</span>
+            <span class="footer-divider">•</span>
+            <span>HTTP 500</span>
+        </div>
+
+    </div>
+</div>

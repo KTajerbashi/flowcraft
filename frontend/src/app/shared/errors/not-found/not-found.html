@@ -1,1 +1,50 @@
-<p>not-found works!</p>
+<div class="not-found-page">
+    <div class="background-orb background-orb--one"></div>
+    <div class="background-orb background-orb--two"></div>
+    <div class="background-orb background-orb--three"></div>
+
+    <main class="not-found-card">
+        <div class="error-illustration" aria-hidden="true">
+            <span class="error-code">404</span>
+            <div class="error-glow"></div>
+        </div>
+
+        <div class="error-content">
+            <span class="error-badge">
+                <span class="status-dot"></span>
+                Page Not Found
+            </span>
+
+            <h1>Oops! Lost in the workflow?</h1>
+
+            <p class="error-description">
+                The page you're looking for doesn't exist, may have been moved,
+                or is temporarily unavailable.
+            </p>
+
+            <div class="error-divider"></div>
+
+            <div class="error-actions">
+                <button type="button" class="btn-primary" (click)="goToDashboard()">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M3 10.5L12 3L21 10.5V20C21 20.55 20.55 21 20 21H4C3.45 21 3 20.55 3 20V10.5Z"
+                            stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9 21V14H15V21" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+
+                    Back to Dashboard
+                </button>
+
+                <button type="button" class="btn-secondary" (click)="goBack()">
+                    Go Back
+                </button>
+            </div>
+
+            <p class="error-footer">
+                <span class="footer-icon">✦</span>
+                FlowCraft <span class="footer-separator">/</span> Workflow Designer
+            </p>
+        </div>
+    </main>
+</div>
