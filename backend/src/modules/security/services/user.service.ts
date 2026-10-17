@@ -1,7 +1,5 @@
 import { BaseService } from '../../../core/services/base.service';
-import {
-    IUser
-} from '../models/user.model';
+import { IUser } from '../models/user.model';
 import { UserRepository } from '../repositories/user.repository';
 
 

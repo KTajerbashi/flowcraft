@@ -48,22 +48,17 @@
 
     <!-- Theme -->
     <button class="btn btn-outline-dark" title="Change theme"><i class="bi bi-sun"></i></button>
-    <!-- Save -->
-    <button class="save-button">
-      <span class="save-icon">✓</span>
-      <span>Saved</span>
-    </button>
+  
 
     <!-- User -->
-    <button class="user-menu">
+    <button class="user-menu" [routerLink]="'security/profile'" routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }">
       <div class="user-avatar">TS</div>
 
       <div class="user-info">
         <span class="user-name">Tajer System</span>
         <span class="user-role">Administrator</span>
       </div>
-
-      <span class="user-arrow">⌄</span>
     </button>
   </div>
 </header>
