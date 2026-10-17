@@ -1,31 +1,47 @@
-import express from 'express';
+import dotenv from 'dotenv';
 
-const app = express();
+dotenv.config();
 
-const PORT = 3000;
+import app from './app';
 
-app.get('/api/workflows', (_req, res) => {
-  console.log('workflows{}')
-  res.json({
-    status: 'ok',
-    message: 'FlowCraft backend is running',
-    data: [],
-  });
-});
+import {
+  AppContext
+} from './core/context/app-context';
 
-app.get('/api/health', (_req, res) => {
-  res.json({
-    status: 'ok',
-    message: 'FlowCraft backend is running',
-  });
-});
+const PORT = Number(process.env['PORT']) || 5000;
 
-app.listen(PORT, () => {
-  console.log('=================================');
-  console.log(' FlowCraft Backend');
-  console.log('=================================');
-  console.log(` Server running on port ${PORT}`);
-  console.log(` http://localhost:${PORT}`);
-  console.log('=================================');
-});
+const context =
+  new AppContext();
 
+async function bootstrap() {
+
+  try {
+
+    await context.connect();
+
+    app.listen(
+      PORT,
+      () => {
+
+        console.log(
+          `Server running on port ${PORT}`
+        );
+
+        console.log(
+          `API: http://localhost:${PORT}/api`
+        );
+      }
+    );
+
+  } catch (error) {
+
+    console.error(
+      'Application startup failed:',
+      error
+    );
+
+    process.exit(1);
+  }
+}
+
+bootstrap();
