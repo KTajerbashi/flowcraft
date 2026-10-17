@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { Document } from 'mongoose';
 import { BaseService } from '../services/base.service';
+import { IBaseEntity } from '../models/IBaseEntity';
 
-export class BaseController<T extends Document> {
+export class BaseController<T extends IBaseEntity> {
 
     constructor(
         protected readonly service: BaseService<T>

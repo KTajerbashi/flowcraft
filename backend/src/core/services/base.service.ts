@@ -1,7 +1,8 @@
 import { Document } from 'mongoose';
 import { BaseRepository } from '../repositories/base.repository';
+import { IBaseEntity } from '../models/IBaseEntity';
 
-export class BaseService<T extends Document> {
+export class BaseService<T extends IBaseEntity> {
 
     constructor(
         protected readonly repository: BaseRepository<T>

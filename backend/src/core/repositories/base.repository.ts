@@ -1,14 +1,14 @@
 import {
-    Document,
     Model,
     UpdateQuery
 } from 'mongoose';
+import { IBaseEntity } from '../models/IBaseEntity';
 
 type QueryFilter<T> = {
     [key: string]: unknown;
 } & Partial<Record<keyof T, unknown>>;
 
-export class BaseRepository<T extends Document> {
+export class BaseRepository<T extends IBaseEntity> {
 
     constructor(
         protected readonly model: Model<T>
