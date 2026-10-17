@@ -1,12 +1,9 @@
 import dotenv from 'dotenv';
-
 dotenv.config();
 
 import app from './app';
-
-import {
-  AppContext
-} from './core/context/app-context';
+import { AppContext } from './core/context/app-context';
+import { initializeDatabase } from './core/context/database-initializer';
 
 const PORT = Number(process.env['PORT']) || 5000;
 
@@ -18,6 +15,7 @@ async function bootstrap() {
   try {
 
     await context.connect();
+    await initializeDatabase();
 
     app.listen(
       PORT,

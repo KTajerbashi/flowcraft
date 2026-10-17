@@ -1,22 +1,15 @@
 import express from 'express';
 import cors from 'cors';
-
-import userRoutes from './modules/security/routes/user.routes';
-import roleRoutes from './modules/security/routes/role.routes';
-import userRoleRoutes from './modules/security/routes/user-role.routes';
+import allRoutes from './routes';
 
 
 
 const app = express();
+
 app.use(cors());
-
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
-app.use(express.urlencoded({
-    extended: true
-}));
-
-const apiPrefix = process.env['API_PREFIX'] || '/api';
 
 app.get(
     '/',
@@ -29,9 +22,7 @@ app.get(
     }
 );
 
-app.use(`${apiPrefix}/users`, userRoutes);
-app.use(`${apiPrefix}/roles`, roleRoutes);
-app.use(`${apiPrefix}/user-roles`, userRoleRoutes);
+app.use(allRoutes);
 
 export default app;
 
