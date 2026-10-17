@@ -15,8 +15,6 @@ export class RoleRepository
         name: string
     ): Promise<IRole | null> {
 
-        return this.findOne({
-            name
-        });
+        return this.onFindOne({ name });
     }
 }

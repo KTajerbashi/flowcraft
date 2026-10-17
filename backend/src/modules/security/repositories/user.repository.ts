@@ -15,17 +15,13 @@ export class UserRepository
         username: string
     ): Promise<IUser | null> {
 
-        return this.findOne({
-            username
-        });
+        return this.onFindOne({username});
     }
 
     async findByEmail(
         email: string
     ): Promise<IUser | null> {
 
-        return this.findOne({
-            email
-        });
+        return this.onFindOne({email});
     }
 }

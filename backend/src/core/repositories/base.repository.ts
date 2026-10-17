@@ -1,64 +1,56 @@
 import {
-  Document,
-  Model,
-  UpdateQuery,
+    Document,
+    Model,
+    UpdateQuery
 } from 'mongoose';
+
+type QueryFilter<T> = {
+    [key: string]: unknown;
+} & Partial<Record<keyof T, unknown>>;
 
 export class BaseRepository<T extends Document> {
 
-  constructor(
-    protected readonly model: Model<T>
-  ) {}
+    constructor(
+        protected readonly model: Model<T>
+    ) { }
 
-  async findAll(): Promise<T[]> {
-    return this.model.find();
-  }
+    async onGetAll(): Promise<T[]> {
+        return this.model.find().exec();
+    }
 
-  async findById(id: string): Promise<T | null> {
-    return this.model.findById(id);
-  }
+    async onGetById(id: string): Promise<T | null> {
+        return this.model.findById(id).exec();
+    }
 
-  async findOne(
-    filter: FilterQuery<T>
-  ): Promise<T | null> {
+    async onFindOne(
+        filter: QueryFilter<T>
+    ): Promise<T | null> {
+        return this.model.findOne(filter).exec();
+    }
 
-    return this.model.findOne(filter);
-  }
+    async onCreate(data: Partial<T>): Promise<T> {
+        return this.model.create(data);
+    }
 
-  async create(
-    data: Partial<T>
-  ): Promise<T> {
+    async onUpdate(
+        id: string,
+        data: UpdateQuery<T>
+    ): Promise<T | null> {
+        return this.model.findByIdAndUpdate(
+            id,
+            data,
+            { new: true, runValidators: true }
+        ).exec();
+    }
 
-    return this.model.create(data);
-  }
+    async onDelete(id: string): Promise<T | null> {
+        return this.model.findByIdAndDelete(id).exec();
+    }
 
-  async update(
-    id: string,
-    data: UpdateQuery<T>
-  ): Promise<T | null> {
-
-    return this.model.findByIdAndUpdate(
-      id,
-      data,
-      {
-        new: true
-      }
-    );
-  }
-
-  async delete(
-    id: string
-  ): Promise<T | null> {
-
-    return this.model.findByIdAndDelete(id);
-  }
-
-  async exists(
-    filter: FilterQuery<T>
-  ): Promise<boolean> {
-
-    const result = await this.model.exists(filter);
-
-    return result !== null;
-  }
+    async onExist(
+        filter: QueryFilter<T>
+    ): Promise<boolean> {
+        const result = await this.model.exists(filter);
+        return result !== null;
+    }
 }

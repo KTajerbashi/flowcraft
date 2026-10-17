@@ -1,8 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-  imports: [RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   standalone: true,
   selector: 'app-header',
   styleUrl: './header.scss',
@@ -21,29 +22,34 @@ export class Header implements OnInit {
         entityId: 'dashboard',
         name: 'dashboard',
         title: 'Dashboard',
-        icon: '⌂',
+        icon: 'bi bi-ui-radios-grid',
         link: '/dashboard',
         children: [],
       },
-
       {
         entityId: 'workflows',
         name: 'workflows',
         title: 'Workflows',
-        icon: '⚙️',
+        icon: 'bi bi-command',
         link: '/workflows',
         children: [],
       },
-
-       {
+      {
         entityId: 'designer',
         name: 'designer',
         title: 'Designer',
-        icon: '⌘',
+        icon: 'bi bi-pencil',
         link: '/designer',
         children: [],
       },
-
+      {
+        entityId: 'users',
+        name: 'user',
+        title: 'UserManagement',
+        icon: 'bi bi-person',
+        link: '/dashboard',
+        children: [],
+      },
     ];
   }
 }

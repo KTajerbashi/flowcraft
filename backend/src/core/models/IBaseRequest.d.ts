@@ -1,0 +1,3 @@
+interface IBaseRequest {
+    id: string
+}
