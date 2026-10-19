@@ -31,6 +31,7 @@ yarn-error.log
 
 # Miscellaneous
 /.angular/cache
+/graphify-out/cache
 .sass-cache/
 /connect.lock
 /coverage

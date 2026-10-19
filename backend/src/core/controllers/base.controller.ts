@@ -14,7 +14,6 @@ export class BaseController<T extends IBaseEntity> {
     ): Promise<void> => {
 
         try {
-
             const data = await this.service.getAll();
 
             res.status(200).json({

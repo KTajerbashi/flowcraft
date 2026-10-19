@@ -11,7 +11,7 @@ import { ApiService } from '../../../core/services/api.service';
 export class WorkflowService extends ApiService {
 
     constructor(http: HttpClient) {
-        super(http, 'workflows');
+        super(http, 'workflow');
     }
 
     onGetWorkflows(): Observable<IWorkflow[]> {
