@@ -21,13 +21,12 @@ async function bootstrap() {
       PORT,
       () => {
 
-        console.log(
-          `Server running on port ${PORT}`
-        );
-
-        console.log(
-          `API: http://localhost:${PORT}/api`
-        );
+        console.log('=================================');
+        console.log(' FlowCraft Backend');
+        console.log('=================================');
+        console.log(` Server running on port ${PORT}`);
+        console.log(` http://localhost:${PORT}`);
+        console.log('=================================');
       }
     );
 
